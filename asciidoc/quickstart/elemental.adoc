@@ -23,13 +23,14 @@ image::quickstart-elemental-architecture.png[]
 
 The following describes the minimum system and environmental requirements to run through this quickstart:
 
-* A host for the centralized management cluster (the one hosting Rancher, Elemental and Edge Image Builder):
+* A host for the centralized management cluster (the one hosting Rancher and Elemental):
  ** Minimum 8 GB RAM and 20 GB disk space for development or testing (see https://ranchermanager.docs.rancher.com/pages-for-subheaders/installation-requirements#hardware-requirements[here] for production use)
- ** Running SLES 15 SP5, openSUSE Leap 15.5, or another compatible operating system that supports Podman.
- ** With https://kubernetes.io/docs/reference/kubectl/kubectl/[Kubectl], https://podman.io[Podman], and https://helm.sh[Helm] installed
 * A target node to be provisioned, i.e. the edge device (a virtual machine can be used for demoing or testing purposes)
  ** Minimum 4GB RAM, 2 CPU cores, and 20 GB disk
 * A resolvable host name for the management cluster or a static IP address to use with a service like sslip.io
+* A host to build the installation media via Edge Image Builder
+ ** Running SLES 15 SP5, openSUSE Leap 15.5, or another compatible operating system that supports Podman.
+ ** With https://kubernetes.io/docs/reference/kubectl/kubectl/[Kubectl], https://podman.io[Podman], and https://helm.sh[Helm] installed
 * A USB flash drive to boot from (if using physical hardware)
 * A downloaded copy of the latest SLE Micro 5.5 SelfInstall "GM2" ISO image found https://www.suse.com/download/sle-micro/[here].
 
@@ -393,7 +394,7 @@ elemental-register --label "network=$INET" \
 ----
 ====
 
-== Node Reset (Recommended)
+== Node Reset (Optional)
 
 SUSE Rancher Elemental supports the ability to perform a "node reset" which can optionally trigger when either a whole cluster is deleted from Rancher, a single node is deleted from a cluster, or a node is manually deleted from the machine inventory. This is useful when you want to reset and clean-up any orphaned resources and want to automatically bring the cleaned node back into the machine inventory so it can be reused. This is not enabled by default, and thus any system that is removed, will not be cleaned up (i.e. data will not be removed, and any Kubernetes cluster resources will continue to operate on the downstream clusters) and it will require manual intervention to wipe data and re-register the machine to Rancher via Elemental.
 
